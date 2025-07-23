@@ -12,7 +12,6 @@ const SKIPPED_DIRS = new Set([
   ".turbo",
   ".vercel",
   ".cache",
-  "public",
   "logs",
   "log",
   ".expo",
@@ -21,6 +20,7 @@ const SKIPPED_DIRS = new Set([
   "storybook-static",
   ".firebase",
   "cypress",
+  "public",
   "tmp",
   "temp",
 ]);
@@ -39,7 +39,10 @@ const SKIPPED_FILES = new Set([
   "tsconfig.json",
   "next.config.js",
   "vite.config.ts",
+  "tsconfig.node.json",
+  "tsconfig.app.json",
   "webpack.config.js",
+  "eslint.config.js",
   ".gitignore",
   ".eslintrc",
   ".prettierrc",
@@ -49,26 +52,42 @@ const SKIPPED_FILES = new Set([
 
 const ALLOWED_EXTENSIONS = new Set([
   // Web & JS ecosystem
-  ".js", ".jsx", ".ts", ".tsx",
-  ".json", ".html", ".css", ".scss", ".md",
+  ".js",
+  ".jsx",
+  ".ts",
+  ".tsx",
+  ".json",
+  ".html",
+  ".css",
+  ".scss",
+  ".md",
 
   // Backend & Scripting
-  ".py",       // Python
-  ".php",      // PHP
-  ".rb",       // Ruby
-  ".sh",       // Shell scripts
-  ".bat",      // Batch scripts
+  ".py", // Python
+  ".php", // PHP
+  ".rb", // Ruby
+  ".sh", // Shell scripts
+  ".bat", // Batch scripts
 
   // System languages
-  ".cpp", ".cc", ".cxx", ".c",   // C / C++
-  ".h", ".hpp",                  // C/C++ headers
-  ".rs",                         // Rust
-  ".go",                         // Go
-  ".java",                       // Java
-  ".kt", ".kts",                 // Kotlin
+  ".cpp",
+  ".cc",
+  ".cxx",
+  ".c", // C / C++
+  ".h",
+  ".hpp", // C/C++ headers
+  ".rs", // Rust
+  ".go", // Go
+  ".java", // Java
+  ".kt",
+  ".kts", // Kotlin
 
   // Misc configs
-  ".xml", ".toml", ".yml", ".yaml", ".ini",
+  ".xml",
+  ".toml",
+  ".yml",
+  ".yaml",
+  ".ini",
 ]);
 
 interface TraverseResult {
@@ -83,7 +102,7 @@ interface TraverseResult {
 export async function traverseFiles(dir: string): Promise<TraverseResult> {
   const result: TraverseResult = {
     files: [],
-    stats: { totalFiles: 0, skippedFiles: 0, skippedDirs: 0 }
+    stats: { totalFiles: 0, skippedFiles: 0, skippedDirs: 0 },
   };
 
   async function walk(currentPath: string) {

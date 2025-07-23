@@ -9,5 +9,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.13.1"
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@qdrant/qdrant-js": "^1.15.0",
+    "dotenv": "^17.2.0",
+    "openai": "^5.10.2",
+    "uuid": "^11.1.0"
+  }
 }
