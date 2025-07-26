@@ -37,7 +37,7 @@ export async function embedAndStoreChunks(chunks: any[]) {
       });
 
       const vector = res.data[0].embedding;
-
+           console.log(chunk);
       await qdrant.upsert(COLLECTION_NAME, {
         wait: true,
         points: [
